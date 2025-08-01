@@ -1,7 +1,18 @@
 name: This is a testing of github workflow pipeline
 on:
-  push: [ main ]
+  push: 
+    branches: [ main ]
 
 jobs:
-  
+  hello-user:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checking out the source code
+      run: echo "Hello user"
+  welcome-user:
+    runs-on: ubuntu-latest
+    needs: hello-user
+    steps:
+    - name: Printing Welcome to user
+      run: echo "Welcome user to the Github workflow"
   
