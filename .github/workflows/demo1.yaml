@@ -1,18 +1,22 @@
 name: This is a testing of github workflow pipeline
 on:
-  push: 
-    branches: [ main ]
+  workflow_dispatch:
+      inputs:
+        username:
+          description: "Enter your name"
+          required: true
+          default: dummy-user
 
 jobs:
   hello-user:
     runs-on: ubuntu-latest
     steps:
     - name: Checking out the source code
-      run: echo "Hello user"
+      run: echo "Hello ${{ github.event.inputs.username }}"
   welcome-user:
     runs-on: ubuntu-latest
     needs: hello-user
     steps:
     - name: Printing Welcome to user
-      run: echo "Welcome user to the Github workflow"
+      run: echo "Welcome ${{github.event.inputs.username}} to the Github workflow"
   
